@@ -21,7 +21,7 @@ print("Got to the end of imports.")
 
 # pre-processing
 def preproc(imageset):
-	images = imageset.reshape((images.shape[0], 28, 28, 1))/255.
+	images = imageset.reshape((imageset.shape[0], 28, 28, 1))/255.
 	return np.where(images > .5, 1.0, 0.0).astype('float32')
 
 train_ims	= preproc(train) # training imageset
@@ -68,8 +68,7 @@ class ConvVAE(tf.keras.Model):
 
 		@tf.function
 		def sample(self, eps=None):
-			if eps is None:
-				eps = tf.random.normal(shape=(100, self.latent_dim))
+			if eps is None:				eps = tf.random.normal(shape=(100, self.latent_dim))
 			return self.decode(eps, apply_sigmoid=True)
 
 
@@ -79,7 +78,7 @@ class ConvVAE(tf.keras.Model):
 
 		def reparameterize(self, mean, logvar):
 			eps = tf.random.normal(shape=mean.shape)
-			retuen eps * tf.exp(logvar * 0.5) + mean
+			return eps * tf.exp(logvar * 0.5) + mean
 
 		def decode(self, z, apply_sigmoid=False):
 			logits = self.decoder(z)
