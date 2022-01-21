@@ -125,8 +125,9 @@ def Decoder(B, x_f, D):
     while len(B) > 0:
         y, s, k, x_ = D[x]['y'], D[x]['s'], D[x]['k'], D[x]['x_']
         if k == 0:
+            # what to do? enters inft loop when k=0. mitigate this and you are done
             continue
-        
+
         bits, B = B[ : k][ : : -1], B[k : ]
         # to debug
         print(f"x (before) : {x}\nx_ (during) : {x_}\nbits : {bits}, converted to int : {int(bits, 2)}\nbitstream : {B}")
@@ -212,6 +213,7 @@ def main():
     print("The starting state: ", x)
     B, x_f = Encoder(stream, x, E)
     print(f"\nThe bitstream is : {B}\nThe final state is : {x_f}\nThe length of the bitstream: {len(B)}")
+
 
     ######################
     ##     DECODING     ##
