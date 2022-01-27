@@ -30,7 +30,6 @@ g : x -> c, p  # maps the symbol to a start point on, and width
 think of s_bar as the latent variable. based on s_bar, we know that the symbol
 is the x corresponding to the interval in which s_bar falls. 
 
-
 """
 
 s_prec = 64
